@@ -14,11 +14,9 @@ async function downloadPDFFromJSON() {
             throw new Error('Ошибка при загрузке файла JSON: данные не являются массивом.');
         }
 
-        let uniqueUrls = [...new Set(data)]; // Удаляем повторяющиеся URL-адреса
-
         let counter = 1; // Счётчик для добавления порядковых номеров к одинаковым именам файлов
         
-        for (let url of uniqueUrls) {
+        for (let url of data) {
             let lastPart = url.split("/").pop().replaceAll("%", "_");
             console.log(url);
             
