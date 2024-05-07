@@ -14,12 +14,13 @@ async function downloadImagesFromJSON() {
             throw new Error('Ошибка при загрузке файла JSON: данные не являются массивом.');
         }
 
+        console.log('Список URL-адресов для загрузки:');
+        console.log(data);
+
         let counter = 1; // Счётчик для добавления порядковых номеров к одинаковым именам файлов
         
         for (let url of data) {
             let lastPart = url.split("/").pop().replaceAll("%", "_");
-            console.log(url);
-            
             let retryCount = 0;
             let downloaded = false;
             
