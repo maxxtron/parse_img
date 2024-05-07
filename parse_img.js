@@ -69,5 +69,5 @@ async function downloadImagesFromJSON() {
         console.error('Ошибка при загрузке файла JSON:', error);
     }
 }
-button.addEventListener("click", downloadImagesFromJSON());
+btn.addEventListener("click", downloadImagesFromJSON());
 
