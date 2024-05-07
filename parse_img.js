@@ -1,4 +1,4 @@
-async function downloadPDFFromJSON() {
+async function downloadImagesFromJSON() {
     const maxRetries = 3; // Максимальное количество попыток скачивания
     const retryDelay = 5000; // Задержка между попытками скачивания (в миллисекундах)
     const jsonURL = '/urls.json'; // URL вашего JSON файла на сервере Vercel
@@ -19,7 +19,7 @@ async function downloadPDFFromJSON() {
         let counter = 1; // Счётчик для добавления порядковых номеров к одинаковым именам файлов
         
         for (let url of uniqueUrls) {
-            let lastPart = url.split("/").pop().replaceAll("%", "_");
+            let filename = `image_${counter}.jpg`; // Уникальное имя файла
             console.log(url);
             
             let retryCount = 0;
@@ -29,16 +29,9 @@ async function downloadPDFFromJSON() {
                 try {
                     const response = await fetch(url);
                     if (!response.ok) {
-                        throw new Error('Ошибка при загрузке файла: ' + response.statusText);
+                        throw new Error('Ошибка при загрузке изображения: ' + response.statusText);
                     }
                     const blob = await response.blob();
-                    
-                    // Добавляем порядковый номер к имени файла, если оно уже существует
-                    let filename = lastPart;
-                    if (retryCount > 0) {
-                        filename = `${lastPart}_${counter}`;
-                        counter++;
-                    }
                     
                     const fileURL = window.URL.createObjectURL(blob);
                     const a = document.createElement('a');
@@ -58,12 +51,14 @@ async function downloadPDFFromJSON() {
             }
             
             if (!downloaded) {
-                console.error(`Не удалось скачать файл ${lastPart} после ${maxRetries} попыток.`);
+                console.error(`Не удалось скачать изображение ${filename} после ${maxRetries} попыток.`);
             }
+
+            counter++; // Увеличиваем счётчик для следующего уникального имени файла
         }
     } catch (error) {
         console.error('Ошибка при загрузке файла JSON:', error);
     }
 }
 
-downloadPDFFromJSON();
+downloadImagesFromJSON();
