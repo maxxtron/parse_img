@@ -3,7 +3,7 @@ async function downloadImagesFromJSON() {
     const retryDelay = 5000; // Задержка между попытками скачивания (в миллисекундах)
     const downloadDelay = 1000; // Задержка между последовательными загрузками (в миллисекундах)
     const jsonURL = '/urls.json'; // URL вашего JSON файла на сервере Vercel
-    const btn = document.querySelector('.btn')
+    let btn = document.querySelector('#btn')
 
     try {
         const response = await fetch(jsonURL);
@@ -69,5 +69,14 @@ async function downloadImagesFromJSON() {
         console.error('Ошибка при загрузке файла JSON:', error);
     }
 }
-btn.addEventListener("click", downloadImagesFromJSON());
+document.addEventListener("DOMContentLoaded", function() {
+    btn = document.querySelector('#btn'); // Получаем кнопку
+    if (btn) {
+        btn.addEventListener("click", function() {
+            downloadImagesFromJSON();
+        });
+    } else {
+        console.error('Кнопка не найдена.');
+    }
+});
 
