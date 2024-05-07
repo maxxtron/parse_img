@@ -1,4 +1,4 @@
-async function downloadPDFFromJSON() {
+async function downloadImagesFromJSON() {
     const maxRetries = 3; // Максимальное количество попыток скачивания
     const retryDelay = 5000; // Задержка между попытками скачивания (в миллисекундах)
     const jsonURL = '/urls.json'; // URL вашего JSON файла на сервере Vercel
@@ -27,14 +27,14 @@ async function downloadPDFFromJSON() {
                 try {
                     const response = await fetch(url);
                     if (!response.ok) {
-                        throw new Error('Ошибка при загрузке файла: ' + response.statusText);
+                        throw new Error('Ошибка при загрузке изображения: ' + response.statusText);
                     }
                     const blob = await response.blob();
                     
                     // Добавляем порядковый номер к имени файла, если оно уже существует
                     let filename = lastPart;
                     if (retryCount > 0) {
-                        filename = `${lastPart}.jpg`;
+                        filename = `${lastPart}_${counter}`;
                         counter++;
                     }
                     
@@ -49,14 +49,14 @@ async function downloadPDFFromJSON() {
                     document.body.removeChild(a);
                     downloaded = true;
                 } catch (error) {
-                    console.error(error);
+                    console.error(`Ошибка при загрузке изображения ${lastPart}:`, error);
                     retryCount++;
                     await new Promise(resolve => setTimeout(resolve, retryDelay));
                 }
             }
             
             if (!downloaded) {
-                console.error(`Не удалось скачать файл ${lastPart} после ${maxRetries} попыток.`);
+                console.error(`Не удалось скачать изображение ${lastPart} после ${maxRetries} попыток.`);
             }
         }
     } catch (error) {
@@ -64,4 +64,4 @@ async function downloadPDFFromJSON() {
     }
 }
 
-downloadPDFFromJSON();
+downloadImagesFromJSON();
