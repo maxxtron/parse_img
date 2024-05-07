@@ -17,10 +17,10 @@ async function downloadImagesFromJSON() {
         console.log('Список URL-адресов для загрузки:');
         console.log(data);
 
-        let counter = 1; // Счётчик для добавления порядковых номеров к одинаковым именам файлов
-        
-        for (let url of data) {
+        await Promise.all(data.map(async (url) => {
             let lastPart = url.split("/").pop().replaceAll("%", "_");
+            console.log(url);
+            
             let retryCount = 0;
             let downloaded = false;
             
@@ -35,8 +35,7 @@ async function downloadImagesFromJSON() {
                     // Добавляем порядковый номер к имени файла, если оно уже существует
                     let filename = lastPart;
                     if (retryCount > 0) {
-                        filename = `${lastPart}_${counter}`;
-                        counter++;
+                        filename = `${lastPart}_${retryCount}`;
                     }
                     
                     const fileURL = window.URL.createObjectURL(blob);
@@ -59,7 +58,7 @@ async function downloadImagesFromJSON() {
             if (!downloaded) {
                 console.error(`Не удалось скачать изображение ${lastPart} после ${maxRetries} попыток.`);
             }
-        }
+        }));
     } catch (error) {
         console.error('Ошибка при загрузке файла JSON:', error);
     }
