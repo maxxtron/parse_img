@@ -34,7 +34,7 @@ async function downloadPDFFromJSON() {
                     // Добавляем порядковый номер к имени файла, если оно уже существует
                     let filename = lastPart;
                     if (retryCount > 0) {
-                        filename = `${lastPart}_${counter}`;
+                        filename = `${lastPart}.jpg`;
                         counter++;
                     }
                     
