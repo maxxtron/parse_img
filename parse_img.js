@@ -1,6 +1,7 @@
 async function downloadImagesFromJSON() {
     const maxRetries = 3; // Максимальное количество попыток скачивания
     const retryDelay = 5000; // Задержка между попытками скачивания (в миллисекундах)
+    const downloadDelay = 1000; // Задержка между последовательными загрузками (в миллисекундах)
     const jsonURL = '/urls.json'; // URL вашего JSON файла на сервере Vercel
 
     try {
@@ -17,7 +18,8 @@ async function downloadImagesFromJSON() {
         console.log('Список URL-адресов для загрузки:');
         console.log(data);
 
-        await Promise.all(data.map(async (url) => {
+        for (let i = 0; i < data.length; i++) {
+            let url = data[i];
             let lastPart = url.split("/").pop().replaceAll("%", "_");
             console.log(url);
             
@@ -58,7 +60,10 @@ async function downloadImagesFromJSON() {
             if (!downloaded) {
                 console.error(`Не удалось скачать изображение ${lastPart} после ${maxRetries} попыток.`);
             }
-        }));
+
+            // Добавляем небольшую задержку перед следующей загрузкой
+            await new Promise(resolve => setTimeout(resolve, downloadDelay));
+        }
     } catch (error) {
         console.error('Ошибка при загрузке файла JSON:', error);
     }
