@@ -43,6 +43,7 @@ async function downloadImagesFromJSON() {
                     const fileURL = window.URL.createObjectURL(blob);
                     const a = document.createElement('a');
                     a.href = `https://homecomfort.resideo.com + ${fileURL}`;
+                    console.log(a.href)
                     // a.href = fileURL;
                     a.download = filename;
                     a.style.display = 'none';
