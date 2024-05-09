@@ -19,7 +19,8 @@ async function downloadImagesFromJSON() {
         console.log(data);
 
         for (let i = 0; i < data.length; i++) {
-            let url = data[i];
+            // let url = data[i];
+            let url = `https://homecomfort.resideo.com + ${data[i]}`;
             let lastPart = url.split("/").pop().replaceAll("%", "_");
             console.log(url);
             
@@ -42,9 +43,7 @@ async function downloadImagesFromJSON() {
                     
                     const fileURL = window.URL.createObjectURL(blob);
                     const a = document.createElement('a');
-                    a.href = `https://homecomfort.resideo.com + ${fileURL}`;
-                    console.log(a.href)
-                    // a.href = fileURL;
+                    a.href = fileURL;
                     a.download = filename;
                     a.style.display = 'none';
                     document.body.appendChild(a);
