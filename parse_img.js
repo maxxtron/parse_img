@@ -2,7 +2,7 @@ async function downloadImagesFromJSON() {
     const maxRetries = 3; // Максимальное количество попыток скачивания
     const retryDelay = 5000; // Задержка между попытками скачивания (в миллисекундах)
     const downloadDelay = 1000; // Задержка между последовательными загрузками (в миллисекундах)
-    const jsonURL = '/urls.json'; // URL вашего JSON файла на сервере Vercel
+    const jsonURL = '/urls.json';
 
     try {
         const response = await fetch(jsonURL);
