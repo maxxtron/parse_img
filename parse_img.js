@@ -19,8 +19,8 @@ async function downloadImagesFromJSON() {
         console.log(data);
 
         for (let i = 0; i < data.length; i++) {
-            // let url = data[i];
-            let url = `https://www.barbieribelts.com${data[i]}`;
+            let url = data[i];
+            // let url = `https://www.barbieribelts.com${data[i]}`;
             let lastPart = url.split("/").pop().replaceAll("%", "_");
             console.log(url);
             
