@@ -6,7 +6,8 @@
 }
 
 #btn {
-  background-color: #4CAF50;
+  background-color: #0095B6;
+  opacity: 0.8;
   color: white;
   padding: 15px 25px;
   font-size: 16px;
@@ -16,5 +17,6 @@
 }
 
 #btn:hover {
-  background-color: #45a049;
+  opacity: 1;
+  background-color: #0095B6;
 }
