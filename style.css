@@ -14,9 +14,16 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  align-items: center;
+  display: flex;
 }
 
 #btn:hover {
   opacity: 1;
   background-color: #0095B6;
+}
+img {
+  margin-left: 5px;
+  width: 20px;
+  height: 20px;
 }
