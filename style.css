@@ -2,11 +2,25 @@ body {
   background-color: #fefffd;
 }
 
+
 #btn-container {
   display: flex; 
   justify-content: center; 
   align-items: center; 
+  flex-direction: column;
   height: 100vh; 
+}
+
+.info {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 25px;
+  color: #025b6e;
+}
+
+.hide {
+  display:none;
 }
 
 #btn {

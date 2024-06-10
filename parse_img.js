@@ -3,7 +3,7 @@ async function downloadImagesFromJSON() {
     const retryDelay = 5000; // Задержка между попытками скачивания (в миллисекундах)
     const downloadDelay = 1000; // Задержка между последовательными загрузками (в миллисекундах)
     const jsonURL = '/urls.json';
-
+    let status = document.querySelector('.info')
     try {
         const response = await fetch(jsonURL);
         if (!response.ok) {
@@ -16,14 +16,15 @@ async function downloadImagesFromJSON() {
         }
 
         console.log('Список URL-адресов для загрузки:');
-        console.log(data);
+        status.innerHTML = 'Качаем...'
+        status.classList.remove('hide');
 
         for (let i = 0; i < data.length; i++) {
             // let url = data[i];
             let url = `https://www.munters.com/${data[i]}`;
             let lastPart = url.split("/").pop().replaceAll("%", "_");
-            console.log(url);
-            
+                
+            console.log(status)
             let retryCount = 0;
             let downloaded = false;
             
@@ -34,7 +35,7 @@ async function downloadImagesFromJSON() {
                         throw new Error('Ошибка при загрузке изображения: ' + response.statusText);
                     }
                     const blob = await response.blob();
-                    
+                    // status.className.remove("hide");
                     // Добавляем порядковый номер к имени файла, если оно уже существует
                     let filename = lastPart;
                     if (retryCount > 0) {
@@ -68,6 +69,7 @@ async function downloadImagesFromJSON() {
     } catch (error) {
         console.error('Ошибка при загрузке файла JSON:', error);
     }
+    status.classList.add('hide');
 }
 document.addEventListener("DOMContentLoaded", function() {
     btn = document.querySelector('#btn'); // Получаем кнопку
