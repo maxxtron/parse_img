@@ -1,5 +1,6 @@
 body {
   background-color: #fefffd;
+  position: relative;
 }
 
 
@@ -9,18 +10,6 @@ body {
   align-items: center; 
   flex-direction: column;
   height: 100vh; 
-}
-
-.info {
-  font-family: "Roboto", sans-serif;
-  font-weight: 500;
-  font-style: italic;
-  font-size: 25px;
-  color: #025b6e;
-}
-
-.hide {
-  display:none;
 }
 
 #btn {
@@ -34,6 +23,7 @@ body {
   cursor: pointer;
   align-items: center;
   display: flex;
+  margin-top: 40px;
 }
 
 #btn:hover {
@@ -44,4 +34,38 @@ img {
   margin-left: 5px;
   width: 20px;
   height: 20px;
+}
+
+.preloadingBlock_el {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150px;
+  height: 150px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+/* .preloadingBlock_el path {
+  fill: var(--accent);
+} */
+.preloadingBlock_el path:first-child {
+  fill: #ffffff;
+}
+.preloadingBlock_el svg {
+  animation: rotate 2s steps(12, end) infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.hide {
+  display:none;
 }

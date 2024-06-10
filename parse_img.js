@@ -3,7 +3,7 @@ async function downloadImagesFromJSON() {
     const retryDelay = 5000; // Задержка между попытками скачивания (в миллисекундах)
     const downloadDelay = 1000; // Задержка между последовательными загрузками (в миллисекундах)
     const jsonURL = '/urls.json';
-    let status = document.querySelector('.info')
+    let status = document.querySelector('.preloadingBlock_el')
     try {
         const response = await fetch(jsonURL);
         if (!response.ok) {
@@ -16,7 +16,6 @@ async function downloadImagesFromJSON() {
         }
 
         console.log('Список URL-адресов для загрузки:');
-        status.innerHTML = 'Качаем...'
         status.classList.remove('hide');
 
         for (let i = 0; i < data.length; i++) {
