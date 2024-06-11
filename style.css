@@ -23,7 +23,6 @@ body {
   cursor: pointer;
   align-items: center;
   display: flex;
-  margin-top: 40px;
 }
 
 #btn:hover {
@@ -68,4 +67,12 @@ img {
 }
 .hide {
   display:none;
+}
+
+.info {
+  font-family: 'Roboto', sans-serif;
+  font-size: 25px;
+  color: #016e86;
+  font-style: italic;
+  font-weight: 500; 
 }
