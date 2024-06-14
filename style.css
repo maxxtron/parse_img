@@ -1,6 +1,7 @@
 body {
   background-color: #fefffd;
   position: relative;
+background-image: linear-gradient(to right top, #e2f0db, #edead2, #f8e3cf, #ffddd2, #ffd8dc, #fcd7e8, #f1d8f4, #e0dbff, #c8e2ff, #ace9ff, #95f0ff, #8ff4ed);
 }
 
 
