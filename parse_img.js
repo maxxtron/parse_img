@@ -3,8 +3,9 @@ async function downloadImagesFromJSON() {
     const retryDelay = 5000; // Задержка между попытками скачивания (в миллисекундах)
     const downloadDelay = 1000; // Задержка между последовательными загрузками (в миллисекундах)
     const jsonURL = '/urls.json';
-    let status = document.querySelector('.preloadingBlock_el')
-    let statusText = document.querySelector('.info')
+    let status = document.querySelector('.preloader')
+        btn = document.querySelector('#btn');
+        icon = document.querySelector('img');
     try {
         const response = await fetch(jsonURL);
         if (!response.ok) {
@@ -18,7 +19,8 @@ async function downloadImagesFromJSON() {
 
         console.log('Список URL-адресов для загрузки:');
         status.classList.remove('hide');
-        statusText.classList.remove('hide');
+        icon.classList.add('hide');
+        btn.innerHTML = "Downloading...";
 
         for (let i = 0; i < data.length; i++) {
             // let url = data[i];
@@ -69,10 +71,10 @@ async function downloadImagesFromJSON() {
         console.error('Ошибка при загрузке файла JSON:', error);
     }
     status.classList.add('hide');
-    statusText.classList.add('hide');
+    icon.classList.remove('hide');
+    btn.innerHTML = 'Download';
 }
-document.addEventListener("DOMContentLoaded", function() {
-    btn = document.querySelector('#btn'); // Получаем кнопку
+document.addEventListener("DOMContentLoaded", function() { // Получаем кнопку
     if (btn) {
         btn.addEventListener("click", function() {
             downloadImagesFromJSON();

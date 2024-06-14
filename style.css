@@ -45,6 +45,7 @@ img {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  height: 100vh; 
 }
 
 /* .preloadingBlock_el path {
@@ -65,9 +66,6 @@ img {
     transform: rotate(360deg);
   }
 }
-.hide {
-  display:none;
-}
 
 .info {
   font-family: 'Roboto', sans-serif;
@@ -75,4 +73,20 @@ img {
   color: #016e86;
   font-style: italic;
   font-weight: 500; 
+}
+.preloader {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 130px;
+  height: 150px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle fill="%230095B6" stroke="%230095B6" stroke-width="12" r="15" cx="40" cy="65"><animate attributeName="cy" calcMode="spline" dur="2" values="65;135;65;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="-.4"></animate></circle><circle fill="%230095B6" stroke="%230095B6" stroke-width="12" r="15" cx="100" cy="65"><animate attributeName="cy" calcMode="spline" dur="2" values="65;135;65;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="-.2"></animate></circle><circle fill="%230095B6" stroke="%230095B6" stroke-width="12" r="15" cx="160" cy="65"><animate attributeName="cy" calcMode="spline" dur="2" values="65;135;65;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="0"></animate></circle></svg>');
+}
+
+.hide {
+  display:none;
 }
