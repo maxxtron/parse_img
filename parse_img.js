@@ -25,7 +25,10 @@ async function downloadImagesFromJSON() {
         for (let i = 0; i < data.length; i++) {
             // let url = data[i];
             let url = `https://www.munters.com/${data[i]}`;
-            let lastPart = url.split("/").pop().replaceAll("%", "_");
+            let parts = url.split("/");
+            let lastPart = parts.pop();
+            let beforeLastPart = parts.pop();
+            let result = beforeLastPart + "/" + lastPart.replaceAll("%", "_");
             let retryCount = 0;
             let downloaded = false;
             
@@ -38,9 +41,9 @@ async function downloadImagesFromJSON() {
                     const blob = await response.blob();
                     // status.className.remove("hide");
                     // Добавляем порядковый номер к имени файла, если оно уже существует
-                    let filename = lastPart;
+                    let filename = result;
                     if (retryCount > 0) {
-                        filename = `${lastPart}_${retryCount}`;
+                        filename = `${result}_${retryCount}`;
                     }
                     
                     const fileURL = window.URL.createObjectURL(blob);
@@ -54,14 +57,14 @@ async function downloadImagesFromJSON() {
                     document.body.removeChild(a);
                     downloaded = true;
                 } catch (error) {
-                    console.error(`Ошибка при загрузке изображения ${lastPart}:`, error);
+                    console.error(`Ошибка при загрузке изображения ${result}:`, error);
                     retryCount++;
                     await new Promise(resolve => setTimeout(resolve, retryDelay));
                 }
             }
             
             if (!downloaded) {
-                console.error(`Не удалось скачать изображение ${lastPart} после ${maxRetries} попыток.`);
+                console.error(`Не удалось скачать изображение ${result} после ${maxRetries} попыток.`);
             }
 
             // Добавляем небольшую задержку перед следующей загрузкой
