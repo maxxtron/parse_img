@@ -30,7 +30,7 @@ background-image: linear-gradient(to right top, #e2f0db, #edead2, #f8e3cf, #ffdd
   opacity: 1;
   background-color: #0095B6;
 }
-img {
+.download {
   margin-left: 5px;
   width: 20px;
   height: 20px;

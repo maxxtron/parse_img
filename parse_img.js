@@ -3,9 +3,11 @@ async function downloadImagesFromJSON() {
     const retryDelay = 5000; // Задержка между попытками скачивания (в миллисекундах)
     const downloadDelay = 1000; // Задержка между последовательными загрузками (в миллисекундах)
     const jsonURL = '/urls.json';
-    let status = document.querySelector('.preloader')
-        btn = document.querySelector('#btn');
-        icon = document.querySelector('img');
+    let status = document.querySelector('.preloader'),
+        btn = document.querySelector('#btn'),
+        icon = document.querySelector('img'),
+        info = document.querySelector('.info'),
+        ok = document.querySelector('.ok');
     try {
         const response = await fetch(jsonURL);
         if (!response.ok) {
@@ -21,10 +23,16 @@ async function downloadImagesFromJSON() {
         status.classList.remove('hide');
         icon.classList.add('hide');
         btn.innerHTML = "Downloading...";
+        btn.disabled = true;
+         btn.style.backgroundColor = 'grey';
+         btn.style.opacity = 0.8;
+         btn.style.cursor = 'default';
+         info.classList.remove('hide');
 
         for (let i = 0; i < data.length; i++) {
             // let url = data[i];
             let url = `https://www.munters.com/${data[i]}`;
+            info.innerHTML = `Downloading ${i + 1} of ${data.length} files...`;
             let parts = url.split("/");
             let lastPart = parts.pop();
             let beforeLastPart = parts.pop();
@@ -75,7 +83,9 @@ async function downloadImagesFromJSON() {
     }
     status.classList.add('hide');
     icon.classList.remove('hide');
-    btn.innerHTML = 'Download';
+    btn.innerHTML = 'Completed';
+    info.classList.add('hide');
+    ok.classList.remove('hide');
 }
 document.addEventListener("DOMContentLoaded", function() { // Получаем кнопку
     if (btn) {
